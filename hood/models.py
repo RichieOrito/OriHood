@@ -23,8 +23,8 @@ class hood(models.Model):
 
 
 
-    class Profile(models.Model):
-         user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile') 
+class Profile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile') 
     house = models.CharField(max_length=50)
     phase = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
@@ -32,5 +32,18 @@ class hood(models.Model):
     profile_picture =models.ImageField(upload_to='images/')
     hood = models.ForeignKey(hood,on_delete=models.SET_NULL, null=True,related_name='neighbors',blank=True)
 
+
+
+    class Business(models.Model):
+        name=models.CharField(max_length=50)
+        phone = models.CharField(max_length=50)
+        start_day = models.CharField(max_length=50)
+        end_day = models.CharField(max_length=50)
+        open_time = models.CharField(max_length=50)
+        close_time = models.CharField(max_length=50)
+        business_image = models.ImageField(upload_to='images/')
+
+        user=models.ForeignKey(Profile, on_delete=models.CASCADE) 
+        neighborhood = models.ForeignKey(hood, on_delete=models.CASCADE)
 
 

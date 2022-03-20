@@ -1,4 +1,3 @@
-from atexit import register
 from django.urls import path, include
 from . import views
 
