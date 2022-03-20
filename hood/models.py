@@ -21,7 +21,28 @@ class hood(models.Model):
     police_email = models.EmailField(blank=True)
     hood_pic =models.ImageField(upload_to='images/')
 
+    @property
+    def occupants_count(self):
+        return Profile.objects.filter(hood=self).count()
 
+    def __str__(self):
+        return self.name
+
+    def create_hood(self):
+        self.save()
+
+    def delete_hood(self):
+        self.delete()
+
+    @classmethod
+    def update_hood(cls,id,name):
+        return cls.objects.filter(id=id).update(name=name)
+
+    class Gender(models.Model):
+        name = models.CharField(max_length=50)
+
+        def __str__(self):
+            return self.name
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile') 
@@ -32,7 +53,22 @@ class Profile(models.Model):
     profile_picture =models.ImageField(upload_to='images/')
     hood = models.ForeignKey(hood,on_delete=models.SET_NULL, null=True,related_name='neighbors',blank=True)
 
+    def __str__(self):
+        return f'{self.user.username} profile'
 
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    def delete_profile(self):
+        self.delete()
+
+    @classmethod
+    def search_profile(cls, search_term):
+        return cls.objects.filter(user__username__icontains=search_term).all()
+    def __str__(self):
+        return f'{self.user.username} Profile'
 
     class Business(models.Model):
         name=models.CharField(max_length=50)
@@ -46,6 +82,23 @@ class Profile(models.Model):
         user=models.ForeignKey(Profile, on_delete=models.CASCADE) 
         neighborhood = models.ForeignKey(hood, on_delete=models.CASCADE)
 
+        def __str__(self):
+            return self.name
+    
+        def create_business(self):
+            self.save()
+
+        def delete_business(self):
+            self.delete()
+
+        @classmethod
+        def find_business(cls, business_id):
+            return cls.objects.filter(id=business_id)
+
+        @classmethod
+        def update_business(cls,id,name):
+            update = cls.objects.filter(id=id).update(name=name)
+            return update
 
     class PostType(models.Model):
         name = models.CharField(max_length=50)
@@ -62,4 +115,10 @@ class Profile(models.Model):
         user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
         hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='posts')
 
+        def __str__(self):
+            return self.title
+
+        @classmethod
+        def search_post(cls, search_term):
+            return cls.objects.filter(title__icontains=search_term).all()
 
