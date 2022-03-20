@@ -47,3 +47,19 @@ class Profile(models.Model):
         neighborhood = models.ForeignKey(hood, on_delete=models.CASCADE)
 
 
+    class PostType(models.Model):
+        name = models.CharField(max_length=50)
+
+        def __str__(self):
+            return self.name
+
+    class Post(models.Model):
+        title = models.CharField(max_length=120, null=True)
+        post = models.TextField()
+        date = models.DateTimeField(auto_now_add=True)
+
+        type = models.ForeignKey(PostType, on_delete=models.CASCADE, related_name='posts')
+        user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
+        hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='posts')
+
+
