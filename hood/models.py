@@ -21,4 +21,16 @@ class hood(models.Model):
     police_email = models.EmailField(blank=True)
     hood_pic =models.ImageField(upload_to='images/')
 
-    
+
+
+    class Profile(models.Model):
+         user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile') 
+    house = models.CharField(max_length=50)
+    phase = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=True)
+    profile_picture =models.ImageField(upload_to='images/')
+    hood = models.ForeignKey(hood,on_delete=models.SET_NULL, null=True,related_name='neighbors',blank=True)
+
+
+
