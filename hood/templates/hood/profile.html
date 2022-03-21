@@ -1,0 +1,73 @@
+{% extends 'hood/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+<main class="container" id="profile">
+
+
+    <!-- Modal -->
+    <form id="newPostForm" action="" method="POST" enctype="multipart/form-data">
+        <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Business</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% bootstrap_form edit_profile_form %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!--  -->
+
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="card mt-3">
+                <div class="profile-header py-2 px-3">
+                    <p>Profile</p>
+                </div>
+                <div class="profile-body p-3">
+                    <div class="profile-pic mt-4">
+                        {% if user.profile.profile_pic %}
+                        <img src="{{user.profile.profile_picture.url}}" alt="Profile pic" class="img-fluid">
+                        {% else %}
+                        <img src="{%static 'img/default.png'%}" alt="">
+                        {% endif %}
+                    </div>
+                    <div>
+                        <ul class="details">
+                            <li><b>Name:</b> {{user.first_name}} {{user.last_name}}</li>
+                            <li><b>House:</b> {{user.profile.house}}</li>
+                            <li><b>Phase:</b> {{user.profile.phase}}</li>
+                            <li><b>Phone:</b> {{user.profile.phone}}</li>
+                            <li><b>Email:</b> {{user.email}}</li>
+                            <li><b>Gender:</b> {{user.profile.gender}}</li>
+                            <li><b>Neighborhood:</b> {{user.profile.hood.name}}</li>
+                            <li class="border p-2"><b>Change Hood</b>
+                                <form action="" method="post" class="d-inline">{% csrf_token %}
+                                    {% bootstrap_form change_hood_form %}
+                                <button id="changeNeighborhood" class="btn btn-primary" type="submit">Submit</button></form>
+                            </li>
+                        </ul>
+                        <a id="profileButton" class="btn btn-primary btn-sm my-4" href="#" role="button"
+                            data-bs-toggle="modal" data-bs-target="#newPostModal">Edit Profile</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</main>
+{%endblock%}

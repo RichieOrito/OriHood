@@ -1,0 +1,71 @@
+{% extends 'hood/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+<main class="container" id="neighborhood">
+    
+    {% if hood %}
+    <div class="card mt-3"> 
+        
+        
+        <div class="neighborhoodHeader py-2 px-3">
+            <p>{{ hood.name }} | {{ hood.location }} </p>
+        </div>
+        <div id="neighborhoodCover">
+            <img src="{{neighborhood.hood_pic.url}}" alt="Neighborhood Image" class="img-fluid">
+        </div>
+        <div id="neighborhoodText" class="m-3">{{ hood.description }}</div>
+        
+    </div>
+    {%else%}
+    <div class="alert alert-warning mt-3">
+        <p>No neighborhood set. Please go to <a href="{% url 'profile'%}">Profile</a> to set a hood.</p>
+    </div>
+    {%endif%}
+    
+
+    <div class="card mt-3">
+        <div class="neighborhoodHeader py-2 px-3">
+            <p>Emergency Contacts</p>
+        </div>
+        {% if hood %}
+        <div id="neighborhoodContacts" class="row p-4">
+            <div class="col-4">
+                <p><strong>{{hood.manager_name}}, <br>Manager</strong></p>
+                <p><i class="fa fa-phone-square" aria-hidden="true"></i> {{hood.manager_number}}</p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i> {{hood.manager_email}}</p>
+            </div>
+            <div class="col-4">
+                <p><strong>{{hood.police_name}}
+                    </strong></p>
+                <p><i class="fa fa-phone-square" aria-hidden="true"></i> {{hood.police_number}}</p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i> {{hood.police_email}}</p>
+            </div>
+            <div class="col-4">
+                <p><strong>{{hood.hospital_name}}</strong></p>
+                <p><i class="fa fa-phone-square" aria-hidden="true"></i> {{hood.dispensary_number}}</p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i> {{hood.dispensary_email}}</p>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+
+    <div class="card my-3">
+        <div class="neighborhoodHeader py-2 px-3">
+            <p>Neighbors</p>
+        </div>
+        <div id="neighbors" class="row p-4">
+            {% for neighbor in hood.neighbors.all %}
+            <div class="col-4">
+                <p><strong>{{neighbor.user.first_name}} {{neighbor.user.last_name}}</strong></p>
+                <p><i class="fa fa-phone-square" aria-hidden="true"></i> {{neighbor.phone}}</p>
+                <p><i class="fa fa-home" aria-hidden="true"></i> {{neighbor.house}}, Phase {{neighbor.phase}}</p>
+            </div>
+            {%endfor%}
+            
+        </div>
+    </div>
+</main>
+{%endblock%}

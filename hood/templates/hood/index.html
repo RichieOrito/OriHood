@@ -1,0 +1,51 @@
+{% extends 'hood/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+<main>
+    <header>
+        <div id="headerContent">
+            <div class="container">
+                <div id="headerHeading">OriHood</div>
+                <div id="headerSiteIntro">More and more clearly every day, out of biology, anthropology, sociology,
+                     history, economic analysis, psychological insight, plain human decency and common sense,
+                      the necessary mandate of survival that we shall love all our neighbors as we do ourselves,
+                       is being confirmed and reaffirmed.</div>
+                <div id="headerCTA">
+                    <a href="{% url 'register'%}"><button type="button" class="btn btn-primary" id="signUpButton">Sign
+                            Up</button></a>
+                    <a href="{% url 'login'%}"><button type="button" class="btn btn-outline-primary"
+                            id="signInButton">Sign In</button></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="descriptions container">
+        <div class="row">
+            <div id="updates" class="col-lg-4">
+                <div class="descHeading">Updates</div>
+                <div class="descIcon"><i class="fas fa-newspaper    "></i></div>
+                <div class="descText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius commodi repellat
+                    asperiores, distinctio sint fugit dolorem dolorum ratione accusantium rerum enim dolor laborum
+                    voluptates corrupti error? Est laborum totam dolor?</div>
+            </div>
+            <div id="businesses" class="col-lg-4">
+                <div class="descHeading">Businesses</div>
+                <div class="descIcon"><i class="fas fa-business-time"></i></div>
+                <div class="descText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius commodi repellat
+                    asperiores, distinctio sint fugit dolorem dolorum ratione accusantium rerum enim dolor laborum
+                    voluptates corrupti error? Est laborum totam dolor?</div>
+            </div>
+            <div id="info" class="col-lg-4">
+                <div class="descHeading">Info</div>
+                <div class="descIcon"><i class="fas fa-home    "></i></div>
+                <div class="descText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius commodi repellat
+                    asperiores, distinctio sint fugit dolorem dolorum ratione accusantium rerum enim dolor laborum
+                    voluptates corrupti error? Est laborum totam dolor?</div>
+            </div>
+        </div>
+    </div>
+</main>
+{%endblock%}
