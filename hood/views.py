@@ -77,3 +77,32 @@ def hood(request):
 
     return render(request, 'hood/neighborhood.html', context)
 
+@login_required(login_url='login')
+def profile(request):
+
+    if request.method == 'POST':
+        edit_profile_form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        change_hood_form = ChangeHoodForm(request.POST, request.FILES, instance=request.user.profile)
+        if edit_profile_form.is_valid():
+            edit_profile_form.instance.user = request.user
+            edit_profile_form.save()
+
+            redirect('profile')
+        elif change_hood_form.is_valid():
+            change_hood_form.save()
+
+            redirect('profile')
+
+    else:
+        edit_profile_form = EditProfileForm()
+        change_hood_form = ChangeHoodForm()
+
+    title = 'Profile'
+    context = {
+        'title': title,
+        'edit_profile_form': edit_profile_form,
+        'change_hood_form':change_hood_form,
+    }
+
+    return render(request, 'hood/profile.html', context)
+
