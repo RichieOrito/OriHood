@@ -123,3 +123,33 @@ def register_user(request):
     context = {'form': form, 'title': title}
     return render(request, 'auth/register.html', context)
 
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
+    else:
+
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                nxt = request.GET.get("next", None)
+                url = '/auth/login/'
+                if nxt is not None:
+                    url += '?next=' + nxt
+
+                return redirect(url)
+
+            else:
+                messages.info(request, 'Username or password is incorrect.')
+    title = 'Login'
+    context = {'title':title}
+    return render(request, 'auth/login.html', context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('index')
