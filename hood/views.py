@@ -15,7 +15,7 @@ def index(request):
 @login_required(login_url='login')
 def feed(request):
     current_user = request.user.profile
-    posts = models.post.objects.filter(hood=current_user.hood)
+    posts = models.Post.objects.filter(hood=current_user.hood)
 
     if request.method == 'POST':
         new_post_form = NewPostForm(request.POST)
@@ -52,7 +52,7 @@ def businesses(request):
     else:
         new_business_form = NewBusinessForm()
 
-    businesses = models.Business.objects.filter(neighborhood=current_user.hood)
+    businesses = models.Business.objects.filter(hood=current_user.hood)
 
     title = 'Businesses'
     context = {
@@ -75,7 +75,7 @@ def hood(request):
         'hood': hood,
     }
 
-    return render(request, 'hood/neighborhood.html', context)
+    return render(request, 'hood/hood.html', context)
 
 @login_required(login_url='login')
 def profile(request):
