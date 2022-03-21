@@ -63,3 +63,17 @@ def businesses(request):
 
     return render(request, 'hood/businesses.html', context)
 
+@login_required(login_url='login')
+def hood(request):
+
+    current_user = request.user
+    hood = current_user.profile.hood
+
+    title = 'hood'
+    context = {
+        'title': title,
+        'hood': hood,
+    }
+
+    return render(request, 'hood/neighborhood.html', context)
+
