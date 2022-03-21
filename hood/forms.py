@@ -28,7 +28,7 @@ class EditProfileForm(ModelForm):
         model = Profile
         exclude = ['user']
 
-class ChangeNeighborhoodForm(ModelForm):
+class ChangeHoodForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['hood']
