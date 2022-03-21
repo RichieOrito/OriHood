@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Galindo&family=Rampart+One&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Galindo', cursive;
+    transition: 300ms;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+    list-style: none;
+    text-decoration: none;
+  }
+
+  :root {
+    --bg-color: #F5F5F5;
+    --main1-color: #F05454;
+    --main2-color: #30475E;
+    --main3-color: #121212;
+    --main4-color: #fff;
+}
+  
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #FAFAFA;
+  }
+  
+  a {
+    color: var(--main1-color);
+    text-decoration: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  main {
+    padding-top: 60px !important;
+  }
+  
+  .card {
+    border-radius: 5px;
+    box-shadow: -3px 3px 10px -8px #5a5a5a;
+    overflow: hidden;
+    border: none;
+  }
+  
+  main {
+    width: 100%;
+  }
+  
+  main header {
+    background-blend-mode: darken;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 55vh;
+    width: 100%;
+    color: #FFFFFF;
+  }
+  
+  main header #headerContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--main2-color);
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  main header #headerContent .container > * {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  main header #headerContent #headerHeading {
+    color: var(--bg-color);
+    font-family: 'Galindo', cursive;
+    font-size: 5rem;
+  }
+  
+  main header #headerContent #headerCTA {
+    text-transform: uppercase;
+  }
+  
+  main header #headerContent #headerCTA #signUpButton {
+    border-radius: 5px;
+    background-color: var(--main1-color);
+    border: 1px solid var(--main1-color);
+  }
+  
+  main header #headerContent #headerCTA #signInButton {
+    border-radius: 5px;
+    color: var(--main1-color);
+    border: 1px solid var(--main1-color);
+  }
+  
+  main header #headerContent #headerCTA #signInButton:hover {
+    background-color: var(--main1-color);
+    color: white;
+  }
+  
+  main .descriptions {
+    text-align: center;
+  }
+  
+  main .descriptions #updates,
+  main .descriptions #businesses,
+  main .descriptions #info {
+    padding: 2rem;
+  }
+  
+  main .descriptions #updates .descHeading,
+  main .descriptions #businesses .descHeading,
+  main .descriptions #info .descHeading {
+    font-weight: 700;
+    color: var(--main3-color);
+    text-transform: uppercase;
+  }
+  
+  main .descriptions #updates .descIcon,
+  main .descriptions #businesses .descIcon,
+  main .descriptions #info .descIcon {
+    font-size: 4rem;
+  }
+  
+  main .descriptions #updates .descIcon i,
+  main .descriptions #businesses .descIcon i,
+  main .descriptions #info .descIcon i {
+    color: #5a5a5a;
+    opacity: .5;
+  }
+  
+  main .descriptions #updates .descText,
+  main .descriptions #businesses .descText,
+  main .descriptions #info .descText {
+    font-size: .8rem;
+    color: #5a5a5a;
+    text-align: justify;
+    text-justify: auto;
+  }
+  
+  
+  .nav_wrapper {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    background-color: var(--bg-color);
+    height: 60px;
+    box-shadow: 0 0 10px -5px #5a5a5a;
+  }
+  
+  .nav_wrapper .container {
+    height: 100%;
+  }
+  
+  .nav_wrapper .container .nav-section-left {
+    height: 100%;
+  }
+  
+  .nav_wrapper .container .nav-section-left .brand_logo {
+    font-family: 'Rowdies', serif;
+    color: #6751B2;
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  
+  .nav_wrapper .container .nav-section-right {
+    height: 100%;
+  }
+  
+  .nav_wrapper .container .nav-section-right ul {
+    margin-top: 1rem;
+    font-size: .8rem;
+  }
+  
+  .nav_wrapper .container .nav-section-right .dropdown-menu {
+    text-transform: capitalize;
+    -webkit-transition: none;
+    transition: none;
+  }
+  
+  #feed #neighborhoodName,
+  #bs #neighborhoodName {
+    background-color: var(--main2-color);
+    color: #FFFFFF;
+    font-size: 1.2 rem;
+    font-weight: 700;
+    z-index: -10;
+  }
+  
+  #feed #newPostBtn,
+  #bs #newPostBtn {
+    background-color: #FFFFFF;
+    border: none;
+    color: var(--main2-color);
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  #feed #newPostBtn:hover,
+  #bs #newPostBtn:hover {
+    box-shadow: -3px 3px 10px -8px #5a5a5a;
+  }
+  
+  #feed #newPostBtn i,
+  #bs #newPostBtn i {
+    color: var(--main1-color);
+    background-color: var(--main2-color);
+    border-radius: 2px;
+    padding: 5px;
+  }
+  
+  #feed #posts .post .post-title,
+  #bs #posts .post .post-title {
+    color: #202020;
+  }
+  
+  #feed #posts .post .post-title i,
+  #bs #posts .post .post-title i {
+    color: #FCD8A2;
+    background-color: #FCD8A226;
+    padding: 5px;
+    border-radius: 2px;
+  }
+  
+  #feed #posts .post .post-content,
+  #bs #posts .post .post-content {
+    font-size: .85rem;
+    color: #5a5a5a;
+  }
+  
+  #feed #posts .post .post-footer,
+  #bs #posts .post .post-footer {
+    font-size: .75rem;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  #feed #posts .post .post-footer .post-user .profile-pic,
+  #bs #posts .post .post-footer .post-user .profile-pic {
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  
+  #feed #posts .post .post-footer .post-user .profile-pic img,
+  #bs #posts .post .post-footer .post-user .profile-pic img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  #businesses > div {
+    max-height: 150px;
+  }
+  
+  #businesses .business-image {
+    width: 20%;
+  }
+  
+  #businesses .business-image img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  #businesses .business-text {
+    color: #5a5a5a;
+    font-size: .85rem;
+  }
+  
+  #businesses .business-text i {
+    color: var(--main2-color);
+  }
+  
+  #neighborhood {
+    margin-bottom: 5vh;
+  }
+  
+  #neighborhood .card .neighborhoodHeader {
+    background-color: var(--main2-color);
+    margin-top: 0;
+  }
+  
+  #neighborhood .card .neighborhoodHeader p {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-top: 10px;
+  }
+  
+  #neighborhood .card #neighborhoodCover {
+    height: 350px;
+    overflow: hidden;
+  }
+  
+  #neighborhood .card #neighborhoodCover img {
+    object-fit: contain;
+    object-position: bottom !important;
+  }
+  
+  #neighborhood .card #neighborhoodText {
+    font-size: .85rem;
+    color: #5a5a5a;
+  }
+  
+  #neighborhood .card #neighborhoodContacts {
+    color: #5a5a5a;
+    line-height: 1;
+  }
+  
+  #neighborhood .card #neighborhoodContacts strong {
+    color: #202020;
+  }
+  
+  #neighborhood .card #neighborhoodContacts i {
+    color: #FCA2A2 !important;
+  }
+  
+  #neighborhood .card #neighbors i {
+    font-size: 1rem;
+    color: #6751B2;
+    border-radius: 5px;
+    max-width: 20px;
+    opacity: .7;
+  }
+  
+  #profile .profile-header {
+    background-color: var(--main2-color);
+    margin-top: 0;
+  }
+  
+  #profile .profile-header p {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-top: 10px;
+  }
+  
+  #profile .profile-body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  #profile .profile-body #profileButton {
+    background-color: var(--main2-color);
+    text-transform: uppercase;
+    border: 1px solid var(--main2-color);
+    border-radius: 5px;
+  }
+  
+  #profile .profile-body .profile-pic {
+    width: 200px;
+    height: 200px;
+    max-width: 300px;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  
+  #profile .profile-body .profile-pic img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  #profile .profile-body .details {
+    width: 100%;
+  }
+  
+  #profile .profile-body .details li {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  #profile .profile-body .details li b {
+    color: var(--main2-color);
+    text-align: right;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    width: 100%;
+    position: relative;
+    padding-right: 10px;
+  }
+  
+  .auth input {
+    border: 1px solid #5a5a5a;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: .5rem;
+  }
+  
+  .auth button {
+    background-color: var(--main2-color);
+    border: 1px solid var(--main2-color);
+    border-radius: 5px;
+  }
+  
+  .auth button:hover {
+    background-color: #6751B2;
+    box-shadow: -3px 3px 10px -8px #5a5a5a;
+    outline: none;
+  }
+  
+  #changeNeighborhood {
+    background-color: transparent;
+    color: var(--main1-color);
+    height: 2rem;
+    font-weight: 700;
+    padding: 0 0 1rem 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    border-radius: 0;
+  }
+  
+  #changeNeighborhood:hover {
+    border-bottom: 3px solid var(--main1-color);
+  }
