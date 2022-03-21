@@ -1,0 +1,53 @@
+{% extends 'neighborhood/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+<main class="container" id="feed">
+    <div id="neighborhoodName" class="my-3 p-2 card">Gallow Estate</div>
+    <button id="newPostBtn" class="btn btn-primary btn-sm " role="button" data-bs-toggle="modal"
+        data-bs-target="#newPostModal"><i class="fa fa-pencil" aria-hidden="true"></i> New Post</button>
+
+    <!-- Modal -->
+    <form id="newPostForm" action="{%url 'feed'%}" method="POST" enctype="multipart/form-data">
+        <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% bootstrap_form new_post_form %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <section id="posts">
+        {% for post in posts %}
+        <div class="card post mt-3 p-3">
+            <div class="post-title mb-2"><i class="fa fa-bell me-2" aria-hidden="true"></i><strong>{{ post.title }}</strong></div>
+            <div class="post-content mb-3">
+                {{ post.post }}
+            </div>
+            <div class="post-footer d-flex justify-content-between align-items-end">
+                <div class="post-user d-flex align-items-end">
+                    <div class="profile-pic">
+                        <img src="{{ post.user.profile_picture.url }}" alt="" class="img-fluid img-responsive">
+                    </div>
+                    <div class="profile-name mx-2">{{ post.user.user.first_name}} {{ post.user.user.last_name}}</div>
+                </div>
+                <div class="post-date">{{ post.date | timesince }} ago</div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</main>
+{%endblock%}
