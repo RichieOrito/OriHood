@@ -1,0 +1,53 @@
+{% extends 'neighborhood/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+<main class="container" id="bs">
+    <div id="neighborhoodName" class="my-3 p-2 card">{{user.profile.hood.name}}</div>
+    <a id="newPostBtn" class="btn btn-primary btn-sm " href="#" role="button" data-bs-toggle="modal"
+        data-bs-target="#newPostModal"><i class="fa fa-pencil"
+            aria-hidden="true"></i> Add Business</a>
+
+    <!-- This Is My Modal -->
+    <form id="newPostForm" action="{%url 'businesses'%}" method="POST" enctype="multipart/form-data">
+        <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Business</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% bootstrap_form new_business_form %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!--  -->
+
+
+    <section id="businesses">
+        {% for business in businesses %}
+        <div class="card d-flex flex-row align-items-center mt-3">
+            <div class="business-image me-3">
+                <img src="{{business.bs_image.url}}" alt="Business Image" class="img-fluid img-responsive">
+            </div>
+            <div class="business-text">
+                <p><strong> {{ business.name }}</strong></p>
+                <p><i class="fa fa-phone-square" aria-hidden="true"></i> {{business.phone}}</p>
+                <p><i class="fa fa-clock" aria-hidden="true"></i> {{business.start_day}}-{{business.end_day}}, {{ business.open_time }}
+                    - {{ business.close_time }}</p>
+            </div>
+        </div>
+        {%endfor%}
+    </section>
+</main>
+{%endblock%}
