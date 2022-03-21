@@ -411,7 +411,7 @@
   }
   
   .auth button:hover {
-    background-color: #6751B2;
+    background-color: var(--main1-color);
     box-shadow: -3px 3px 10px -8px #5a5a5a;
     outline: none;
   }
