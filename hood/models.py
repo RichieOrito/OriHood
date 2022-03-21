@@ -79,7 +79,7 @@ class Business(models.Model):
     business_image = models.ImageField(upload_to='images/')
 
     user=models.ForeignKey(Profile, on_delete=models.CASCADE) 
-    neighborhood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -120,4 +120,3 @@ class Post(models.Model):
     @classmethod
     def search_post(cls, search_term):
         return cls.objects.filter(title__icontains=search_term).all()
-
