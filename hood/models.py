@@ -1,4 +1,3 @@
-from multiprocessing import managers
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -6,7 +5,7 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 
-class hood(models.Model):
+class Hood(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     description = models.TextField()
@@ -23,7 +22,7 @@ class hood(models.Model):
 
     @property
     def occupants_count(self):
-        return Profile.objects.filter(hood=self).count()
+        return Profile.objects.filter(Hood=self).count()
 
     def __str__(self):
         return self.name
@@ -38,11 +37,11 @@ class hood(models.Model):
     def update_hood(cls,id,name):
         return cls.objects.filter(id=id).update(name=name)
 
-    class Gender(models.Model):
-        name = models.CharField(max_length=50)
+class Gender(models.Model):
+    name = models.CharField(max_length=50)
 
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return self.name
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile') 
@@ -51,7 +50,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=50)
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=True)
     profile_picture =models.ImageField(upload_to='images/')
-    hood = models.ForeignKey(hood,on_delete=models.SET_NULL, null=True,related_name='neighbors',blank=True)
+    hood = models.ForeignKey(Hood,on_delete=models.SET_NULL, null=True,related_name='neighbors',blank=True)
 
     def __str__(self):
         return f'{self.user.username} profile'
@@ -70,55 +69,55 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-    class Business(models.Model):
-        name=models.CharField(max_length=50)
-        phone = models.CharField(max_length=50)
-        start_day = models.CharField(max_length=50)
-        end_day = models.CharField(max_length=50)
-        open_time = models.CharField(max_length=50)
-        close_time = models.CharField(max_length=50)
-        business_image = models.ImageField(upload_to='images/')
+class Business(models.Model):
+    name=models.CharField(max_length=50)
+    phone = models.CharField(max_length=50)
+    start_day = models.CharField(max_length=50)
+    end_day = models.CharField(max_length=50)
+    open_time = models.CharField(max_length=50)
+    close_time = models.CharField(max_length=50)
+    business_image = models.ImageField(upload_to='images/')
 
-        user=models.ForeignKey(Profile, on_delete=models.CASCADE) 
-        neighborhood = models.ForeignKey(hood, on_delete=models.CASCADE)
+    user=models.ForeignKey(Profile, on_delete=models.CASCADE) 
+    neighborhood = models.ForeignKey(Hood, on_delete=models.CASCADE)
 
-        def __str__(self):
-            return self.name
-    
-        def create_business(self):
-            self.save()
+    def __str__(self):
+        return self.name
 
-        def delete_business(self):
-            self.delete()
+    def create_business(self):
+        self.save()
 
-        @classmethod
-        def find_business(cls, business_id):
-            return cls.objects.filter(id=business_id)
+    def delete_business(self):
+        self.delete()
 
-        @classmethod
-        def update_business(cls,id,name):
-            update = cls.objects.filter(id=id).update(name=name)
-            return update
+    @classmethod
+    def find_business(cls, business_id):
+        return cls.objects.filter(id=business_id)
 
-    class PostType(models.Model):
-        name = models.CharField(max_length=50)
+    @classmethod
+    def update_business(cls,id,name):
+        update = cls.objects.filter(id=id).update(name=name)
+        return update
 
-        def __str__(self):
-            return self.name
+class PostType(models.Model):
+    name = models.CharField(max_length=50)
 
-    class Post(models.Model):
-        title = models.CharField(max_length=120, null=True)
-        post = models.TextField()
-        date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
 
-        type = models.ForeignKey(PostType, on_delete=models.CASCADE, related_name='posts')
-        user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
-        hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='posts')
+class Post(models.Model):
+    title = models.CharField(max_length=120, null=True)
+    post = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
-        def __str__(self):
-            return self.title
+    type = models.ForeignKey(PostType, on_delete=models.CASCADE, related_name='posts')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE, related_name='posts')
 
-        @classmethod
-        def search_post(cls, search_term):
-            return cls.objects.filter(title__icontains=search_term).all()
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def search_post(cls, search_term):
+        return cls.objects.filter(title__icontains=search_term).all()
 
